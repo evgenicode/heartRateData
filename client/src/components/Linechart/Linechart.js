@@ -5,15 +5,36 @@ import { AxisLeft } from "./AxisLeft";
 import { Marks } from "./Marks";
 
 const margin = { top: 20, right: 30, bottom: 60, left: 100 };
-const xAxisLabelOffset = 40;
+const xAxisLabelOffset = 45;
 const yAxisLabelOffset = 40;
 
 export const Linechart = ({ height, width, data }) => {
+  const getTimeDifference = (data) => {
+    const startDate = data[0].startTime;
+    const endDate = data[data.length - 1].startTime;
+    const timeDifference = endDate - startDate;
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
+
+    if (days >= 1) {
+      return `${days} days, ${hours} hours, ${minutes} minutes`;
+    } else if (hours >= 1) {
+      return `${hours} hours, ${minutes} minutes`;
+    } else {
+      return `${minutes} minutes`;
+    }
+  };
+
   const innerHeight = height - margin.top - margin.bottom;
   const innerWidth = width - margin.left - margin.right;
 
   const xValue = (d) => d.startTime;
-  const xAxisLabel = "Time";
+  const xAxisLabel = getTimeDifference(data);
 
   const yValue = (d) => d.value;
   const yAxisLabel = "Heart Rate";

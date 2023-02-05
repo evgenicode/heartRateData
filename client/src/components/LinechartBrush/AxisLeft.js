@@ -1,5 +1,5 @@
 export const AxisLeft = ({ yScale, innerWidth, tickOffset = 3 }) =>
-  yScale.ticks().map((tickValue) => (
+  yScale.ticks(3).map((tickValue) => (
     <g
       key={tickValue}
       className="tick"

@@ -6,7 +6,7 @@ import { AxisLeft } from "./AxisLeft";
 import { Marks } from "./Marks";
 
 const margin = { top: 20, right: 30, bottom: 60, left: 100 };
-const xAxisLabelOffset = 40;
+const xAxisLabelOffset = 45;
 const yAxisLabelOffset = 40;
 
 export const LinechartBrush = ({
@@ -24,9 +24,9 @@ export const LinechartBrush = ({
   const xAxisLabel = "Time";
 
   const yValue = (d) => d.value;
-  const yAxisLabel = "Heart Rate";
+  // const yAxisLabel = "Heart Rate";
 
-  const xAxisTickFormat = timeFormat("%a");
+  const xAxisTickFormat = timeFormat("%d %b");
 
   const xScale = scaleTime()
     .domain(extent(data, xValue))
@@ -65,7 +65,7 @@ export const LinechartBrush = ({
             innerHeight / 2
           }) rotate(-90)`}
         >
-          {yAxisLabel}
+          {/* {yAxisLabel} */}
         </text>
         <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={10} />
         <text
