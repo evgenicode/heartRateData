@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Linechart } from "./components/Linechart/Linechart";
+import { HeartRateGraphView } from "./components/HeartRateGraphView/HeartRateGraphView";
 
 function App() {
   return (
     <div className="App">
-      <Linechart />
+      <HeartRateGraphView />
     </div>
   );
 }

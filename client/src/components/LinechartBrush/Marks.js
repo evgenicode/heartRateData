@@ -1,4 +1,4 @@
-import { line, curveBasis } from "d3";
+import { line, curveNatural } from "d3";
 
 export const Marks = ({ data, xScale, yScale, xValue, yValue }) => (
   <g className="marks">
@@ -8,7 +8,7 @@ export const Marks = ({ data, xScale, yScale, xValue, yValue }) => (
       d={line()
         .x((d) => xScale(xValue(d)))
         .y((d) => yScale(yValue(d)))
-        .curve(curveBasis)(data)}
+        .curve(curveNatural)(data)}
     />
   </g>
 );

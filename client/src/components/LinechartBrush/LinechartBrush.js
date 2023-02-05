@@ -1,5 +1,6 @@
-import React from "react";
-import { scaleLinear, scaleTime, timeFormat, extent } from "d3";
+import React, { useRef, useEffect } from "react";
+import { scaleLinear, scaleTime, timeFormat, extent, brushX, select } from "d3";
+
 import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
 import { Marks } from "./Marks";
@@ -8,11 +9,18 @@ const margin = { top: 20, right: 30, bottom: 60, left: 100 };
 const xAxisLabelOffset = 40;
 const yAxisLabelOffset = 40;
 
-export const Linechart = ({ height, width, data }) => {
+export const LinechartBrush = ({
+  height,
+  width,
+  data,
+  setBrushExtent,
+  xValue,
+}) => {
+  const brushRef = useRef();
+
   const innerHeight = height - margin.top - margin.bottom;
   const innerWidth = width - margin.left - margin.right;
 
-  const xValue = (d) => d.startTime;
   const xAxisLabel = "Time";
 
   const yValue = (d) => d.value;
@@ -29,6 +37,17 @@ export const Linechart = ({ height, width, data }) => {
     .domain(extent(data, yValue))
     .range([innerHeight, 0])
     .nice();
+
+  useEffect(() => {
+    const brush = brushX().extent([
+      [0, 0],
+      [innerWidth, innerHeight],
+    ]);
+    brush(select(brushRef.current));
+    brush.on("brush end", (event) => {
+      setBrushExtent(event.selection && event.selection.map(xScale.invert));
+    });
+  }, [innerWidth, innerHeight]);
 
   return (
     <svg width={width} height={height}>
@@ -65,6 +84,7 @@ export const Linechart = ({ height, width, data }) => {
           yValue={yValue}
           tooltipFormat={xAxisTickFormat}
         />
+        <g ref={brushRef} />
       </g>
     </svg>
   );
