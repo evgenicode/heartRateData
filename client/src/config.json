@@ -1,0 +1,4 @@
+{
+  "DATABASE_API": "http://localhost:5000/api/heartRateDataFromDatabase",
+  "LOCAL_DATA_STORAGE_API": "http://localhost:5000/api/heartRateData"
+}
