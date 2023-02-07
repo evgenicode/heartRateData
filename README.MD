@@ -27,7 +27,7 @@ client/src/config.json
 Specify the port you chose in both variables (http://localhost:\*\*\*\*)
 
 Note: Also if you can't run your frontend on default 3000 port, react will prompt you to use another port.
-Make sure to change this port in your .env file variable PORT
+Make sure to change this port in your .env file variable CLIENT_URL
 
 To launch the app:
 Make sure you have Node.js installed. You can download it here https://nodejs.org/en/download/
@@ -57,4 +57,4 @@ then run
 
 The app should open in your default browser.
 
-Note: If the defualt port 3000 is taken, react will prompt you to use another port. In this case specify the new PORT variable in ".env" file in the project "server" folder.
+Note: If the defualt port 3000 is taken, react will prompt you to use another port. In this case specify the new CLIENT_URL variable in ".env" file in the project "server" folder.
