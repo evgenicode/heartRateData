@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:5000/api/heartRateData";
+const baseUrl = "http://localhost:5000/api/heartRateDataFromDatabase";
 
 export const getHeartRateData = () => {
   const request = axios.get(baseUrl);

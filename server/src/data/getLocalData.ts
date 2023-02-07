@@ -1,12 +1,8 @@
 import fs from "fs";
+import { hasHealthTypeCode } from "../interfaces/interfaces";
+import { heartRateFilter } from "../filters/heartRateFilter";
 
 const LOCAL_DATA_STORAGE = process.env.LOCAL_DATA_STORAGE;
-
-interface hasHealthTypeCode {
-  startTime: number;
-  samplePoints: any;
-  type: number;
-}
 
 if (!LOCAL_DATA_STORAGE) {
   throw new Error(
@@ -20,10 +16,4 @@ export const heartRateData = data.filter(
   (item: hasHealthTypeCode) => item.type === 7
 );
 
-export const heartRateDataFormated = heartRateData.map(function (
-  item: hasHealthTypeCode
-) {
-  const startTime = new Date(item.samplePoints[0].startTime);
-  const value = item.samplePoints[0].value;
-  return { startTime, value };
-});
+export const heartRateDataFormated = heartRateFilter(heartRateData);
