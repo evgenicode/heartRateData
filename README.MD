@@ -9,11 +9,11 @@ The app is built using React and JavaScript for the frontend, and Node.js TypeSc
 
 Before you run the app, you need to create a .env file in the "server" folder with the following information:
 
-NODE_ENV = development
-PORT = 5000
-MONGO_URI = mongodb+srv://Github:Np1Xufzreb8e0LBN@heartratecluster.astkcqz.mongodb.net/healthDetailData?retryWrites=true&w=majority
-CLIENT_URL = "http://localhost:3000"
-LOCAL_DATA_STORAGE = "C:\\MyFiles\\projects\\heartRateData\\server\\src\\data\\healthDetailData.json"
+NODE_ENV = development<br>
+PORT = 5000<br>
+MONGO_URI = mongodb+srv://Github:Np1Xufzreb8e0LBN@heartratecluster.astkcqz.mongodb.net/healthDetailData?retryWrites=true&w=majority<br>
+CLIENT_URL = "http://localhost:3000"<br>
+LOCAL_DATA_STORAGE = "C:\\MyFiles\\projects\\heartRateData\\server\\src\\data\\healthDetailData.json"<br>
 
 Note: Make sure to replace the path to the healthDetailData.json (LOCAL_DATA_STORAGE variable) file with your own file location.
 
