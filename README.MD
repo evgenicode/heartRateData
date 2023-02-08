@@ -18,6 +18,7 @@ LOCAL_DATA_STORAGE = "C:\\MyFiles\\projects\\heartRateData\\server\\src\\data\\h
 Note: Make sure to replace the path to the healthDetailData.json (LOCAL_DATA_STORAGE variable) file with your own file location.<br>
 
 Note: To use your own heartrate data, download it from the Huawei server, unpack the archive, and copy the "health detail data.json" file from the "Health detail data & description" folder. Provide the path to this file in the .env file under the LOCAL_DATA_STORAGE variable.<br>
+You will also need to set "DATA_ORIGIN": "local" in client/src/config.json, since by default the app gets data from the database.<br>
 
 Note: If you have something else running on PORT 5000 and can't use it, make sure to also change it in frontend configuration.
 To do this navigate to<br>
