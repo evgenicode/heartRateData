@@ -47,7 +47,7 @@ export const LinechartBrush = ({
     brush.on("brush end", (event) => {
       setBrushExtent(event.selection && event.selection.map(xScale.invert));
     });
-  }, [innerWidth, innerHeight]);
+  }, [innerWidth, innerHeight, setBrushExtent, xScale.invert]);
 
   return (
     <svg width={width} height={height}>
