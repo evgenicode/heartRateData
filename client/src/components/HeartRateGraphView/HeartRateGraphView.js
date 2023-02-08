@@ -29,7 +29,8 @@ export const HeartRateGraphView = () => {
   return (
     <svg width={width} height={height}>
       <Linechart
-        data={filteredData}
+        data={data}
+        filteredData={filteredData}
         height={height - LinechartBrushSize * height}
         width={width}
       />

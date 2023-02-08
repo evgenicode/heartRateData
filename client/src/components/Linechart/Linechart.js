@@ -8,11 +8,11 @@ const margin = { top: 20, right: 30, bottom: 60, left: 100 };
 const xAxisLabelOffset = 45;
 const yAxisLabelOffset = 40;
 
-export const Linechart = ({ height, width, data }) => {
+export const Linechart = ({ height, width, data, filteredData }) => {
   const getTimeDifference = (data) => {
-    const startDate = data.length > 1 ? data[0].startTime : undefined;
+    const startDate = data.length >= 1 ? data[0].startTime : undefined;
     const endDate =
-      data.length > 1 ? data[data.length - 1].startTime : undefined;
+      data.length >= 1 ? data[data.length - 1].startTime : undefined;
     const timeDifference = endDate - startDate;
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     const hours = Math.floor(
@@ -36,7 +36,7 @@ export const Linechart = ({ height, width, data }) => {
   const innerWidth = width - margin.left - margin.right;
 
   const xValue = (d) => d.startTime;
-  const xAxisLabel = getTimeDifference(data);
+  const xAxisLabel = getTimeDifference(filteredData);
 
   const yValue = (d) => d.value;
   const yAxisLabel = "Heart Rate";
@@ -44,7 +44,7 @@ export const Linechart = ({ height, width, data }) => {
   const xAxisTickFormat = timeFormat("%a");
 
   const xScale = scaleTime()
-    .domain(extent(data, xValue))
+    .domain(extent(filteredData, xValue))
     .range([0, innerWidth])
     .nice();
 
@@ -81,7 +81,7 @@ export const Linechart = ({ height, width, data }) => {
           {xAxisLabel}
         </text>
         <Marks
-          data={data}
+          data={filteredData}
           xScale={xScale}
           yScale={yScale}
           xValue={xValue}
