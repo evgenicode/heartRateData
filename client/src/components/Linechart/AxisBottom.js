@@ -4,7 +4,7 @@ export const AxisBottom = ({
   tickFormat,
   tickOffset = 3,
 }) =>
-  xScale.ticks().map((tickValue) => (
+  xScale.ticks(8).map((tickValue) => (
     <g
       className="tick"
       key={tickValue}
