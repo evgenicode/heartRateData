@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import { getHeartRateData } from "services/heartRateData";
 
 export const useData = () => {

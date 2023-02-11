@@ -7,7 +7,6 @@ import { Marks } from "./Marks";
 
 const margin = { top: 20, right: 30, bottom: 60, left: 100 };
 const xAxisLabelOffset = 45;
-const yAxisLabelOffset = 40;
 
 export const LinechartBrush = ({
   height,
@@ -24,7 +23,6 @@ export const LinechartBrush = ({
   const xAxisLabel = "Time";
 
   const yValue = (d) => d.value;
-  // const yAxisLabel = "Heart Rate";
 
   const xAxisTickFormat = timeFormat("%d %b");
 
@@ -58,15 +56,7 @@ export const LinechartBrush = ({
           tickFormat={xAxisTickFormat}
           tickOffset={10}
         />
-        <text
-          className="axis-label"
-          textAnchor="middle"
-          transform={`translate(${-yAxisLabelOffset}, ${
-            innerHeight / 2
-          }) rotate(-90)`}
-        >
-          {/* {yAxisLabel} */}
-        </text>
+
         <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={10} />
         <text
           className="axis-label"

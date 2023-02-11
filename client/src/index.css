@@ -27,5 +27,12 @@ code {
 }
 
 .description-paragraph {
-  margin-left: 4em;
+  margin-left: 0em;
+}
+
+.centered {
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: left;
 }

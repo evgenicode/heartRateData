@@ -1,10 +1,8 @@
 import { timeFormat } from "d3";
+import { getTimeline } from "utils";
 
 export const getTickFormat = (data) => {
-  const startDate = data.length >= 1 ? data[0].startTime : undefined;
-  const endDate =
-    data.length >= 1 ? data[data.length - 1].startTime : undefined;
-  const timeDifference = endDate - startDate;
+  const { timeDifference } = getTimeline(data);
 
   let tickFormat = undefined;
   if (timeDifference < 24 * 60 * 60 * 1000) {

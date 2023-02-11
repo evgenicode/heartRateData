@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
 import { useData } from "./useData";
-
 import { Linechart } from "components/Linechart/Linechart";
 import { LinechartBrush } from "components/LinechartBrush/LinechartBrush";
+import { Summary } from "components/Summary/Summary";
 
 const width = 960;
 const height = 500;
@@ -27,22 +26,27 @@ export const HeartRateGraphView = () => {
     : data;
 
   return (
-    <svg width={width} height={height}>
-      <Linechart
-        data={data}
-        filteredData={filteredData}
-        height={height - LinechartBrushSize * height}
-        width={width}
-      />
-      <g transform={`translate(${0}, ${height - LinechartBrushSize * height})`}>
-        <LinechartBrush
-          xValue={xValue}
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <svg width={width} height={height}>
+        <Linechart
           data={data}
-          height={LinechartBrushSize * height}
+          filteredData={filteredData}
+          height={height - LinechartBrushSize * height}
           width={width}
-          setBrushExtent={setBrushExtent}
         />
-      </g>
-    </svg>
+        <g
+          transform={`translate(${0}, ${height - LinechartBrushSize * height})`}
+        >
+          <LinechartBrush
+            xValue={xValue}
+            data={data}
+            height={LinechartBrushSize * height}
+            width={width}
+            setBrushExtent={setBrushExtent}
+          />
+        </g>
+      </svg>
+      <Summary data={filteredData} />
+    </div>
   );
 };
