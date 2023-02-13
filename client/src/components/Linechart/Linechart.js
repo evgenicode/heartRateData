@@ -1,12 +1,12 @@
 import React from "react";
-import { scaleLinear, scaleTime, extent } from "d3";
+import { scaleLinear, scaleTime, extent, min, max } from "d3";
 import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
 import { Marks } from "./Marks";
 import { getTimeDifference } from "./getTimeDifference";
 import { getTickFormat } from "./getTickFormat";
 
-const margin = { top: 20, right: 30, bottom: 60, left: 100 };
+const margin = { top: 20, right: 30, bottom: 60, left: 65 };
 const xAxisLabelOffset = 45;
 const yAxisLabelOffset = 40;
 
@@ -27,8 +27,10 @@ export const Linechart = ({ height, width, data, filteredData }) => {
     .range([0, innerWidth])
     .nice();
 
+  const yMax = max(data, yValue) + 10;
+
   const yScale = scaleLinear()
-    .domain(extent(data, yValue))
+    .domain([min(data, yValue), yMax])
     .range([innerHeight, 0])
     .nice();
 
@@ -40,6 +42,7 @@ export const Linechart = ({ height, width, data, filteredData }) => {
           innerHeight={innerHeight}
           tickFormat={xAxisTickFormat}
           tickOffset={10}
+          width={width}
         />
         <text
           className="axis-label"

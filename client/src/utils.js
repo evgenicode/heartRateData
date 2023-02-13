@@ -17,3 +17,21 @@ export const getTimeline = (data) => {
 
 export const infinityNaNguard = (data) =>
   data === Infinity || isNaN(data) ? 0 : data;
+
+// TODO: imporove all visual artifacts
+export const tickModifier = (data) => {
+  let axisTickModifier;
+  if (data >= 825) {
+    axisTickModifier = 8;
+  } else if (data >= 690) {
+    axisTickModifier = 7;
+  } else if (data >= 510) {
+    axisTickModifier = 6;
+  } else if (data >= 400) {
+    axisTickModifier = 4;
+  } else {
+    axisTickModifier = 2;
+  }
+
+  return axisTickModifier;
+};

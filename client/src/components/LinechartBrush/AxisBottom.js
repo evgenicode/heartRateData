@@ -1,10 +1,13 @@
+import { tickModifier } from "utils";
+
 export const AxisBottom = ({
   xScale,
   innerHeight,
   tickFormat,
   tickOffset = 3,
+  width,
 }) =>
-  xScale.ticks().map((tickValue) => (
+  xScale.ticks(tickModifier(width)).map((tickValue) => (
     <g
       className="tick"
       key={tickValue}

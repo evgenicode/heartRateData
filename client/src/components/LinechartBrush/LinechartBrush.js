@@ -5,7 +5,7 @@ import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
 import { Marks } from "./Marks";
 
-const margin = { top: 20, right: 30, bottom: 60, left: 100 };
+const margin = { top: 20, right: 30, bottom: 60, left: 60 };
 const xAxisLabelOffset = 45;
 
 export const LinechartBrush = ({
@@ -18,7 +18,7 @@ export const LinechartBrush = ({
   const brushRef = useRef();
 
   const innerHeight = height - margin.top - margin.bottom;
-  const innerWidth = width - margin.left - margin.right;
+  const innerWidth = Math.max(0, width - margin.left - margin.right);
 
   const xAxisLabel = "Time";
 
@@ -55,6 +55,7 @@ export const LinechartBrush = ({
           innerHeight={innerHeight}
           tickFormat={xAxisTickFormat}
           tickOffset={10}
+          width={width}
         />
 
         <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={10} />
