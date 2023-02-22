@@ -68,7 +68,6 @@ export const Linechart = ({ height, width, data, filteredData }) => {
           yScale={yScale}
           xValue={xValue}
           yValue={yValue}
-          tooltipFormat={xAxisTickFormat}
         />
       </g>
     </svg>

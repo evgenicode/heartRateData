@@ -73,7 +73,6 @@ export const LinechartBrush = ({
           yScale={yScale}
           xValue={xValue}
           yValue={yValue}
-          tooltipFormat={xAxisTickFormat}
         />
         <g ref={brushRef} />
       </g>
