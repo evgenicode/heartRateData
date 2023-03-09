@@ -10,7 +10,14 @@ const margin = { top: 20, right: 30, bottom: 60, left: 65 };
 const xAxisLabelOffset = 45;
 const yAxisLabelOffset = 40;
 
-export const Linechart = ({ height, width, data, filteredData }) => {
+export const Linechart = ({
+  height,
+  width,
+  data,
+  filteredData,
+  brushExtent,
+}) => {
+  const dynamicData = brushExtent ? filteredData : data;
   const innerHeight = height - margin.top - margin.bottom;
   const innerWidth = width - margin.left - margin.right;
 
@@ -23,7 +30,7 @@ export const Linechart = ({ height, width, data, filteredData }) => {
   const xAxisTickFormat = getTickFormat(filteredData);
 
   const xScale = scaleTime()
-    .domain(extent(filteredData, xValue))
+    .domain(extent(dynamicData, xValue))
     .range([0, innerWidth])
     .nice();
 
@@ -63,7 +70,7 @@ export const Linechart = ({ height, width, data, filteredData }) => {
           {xAxisLabel}
         </text>
         <Marks
-          data={filteredData}
+          data={dynamicData}
           xScale={xScale}
           yScale={yScale}
           xValue={xValue}

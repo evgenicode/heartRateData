@@ -32,7 +32,7 @@ export const Summary = ({ data }) => {
       <p>Max value: {maxValue} BPM</p>
       <p>Min value: {minValue} BPM</p>
       <p>Avg value: {averageBPM} BPM</p>
-      <p>{data.length} datapints</p>
+      <p>{data.length} datapoints</p>
       <p>Avg measurement interval: {averageMeasurement} min</p>
     </div>
   );
