@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -24,6 +25,11 @@ const DataDateFilter = ({ data, setDateExtent, dateExtent }) => {
     setDateExtent([startDate, endDate]);
   }, [startDate, endDate, setDateExtent]);
 
+  const resetSelection = () => {
+    setStartDate(data[0].startTime);
+    setEndDate(data[data.length - 1].startTime);
+  };
+
   return (
     <Container fluid="md">
       <Row>
@@ -33,7 +39,7 @@ const DataDateFilter = ({ data, setDateExtent, dateExtent }) => {
       </Row>
 
       <Row>
-        <Col md={6}>
+        <Col md={4}>
           <div className="d-flex align-items-center">
             <span style={{ marginRight: "1%", whiteSpace: "nowrap" }}>
               Start date
@@ -44,7 +50,7 @@ const DataDateFilter = ({ data, setDateExtent, dateExtent }) => {
             />
           </div>
         </Col>
-        <Col md={6}>
+        <Col md={4}>
           <div className="d-flex align-items-center">
             <span style={{ marginRight: "1%", whiteSpace: "nowrap" }}>
               End date
@@ -54,6 +60,15 @@ const DataDateFilter = ({ data, setDateExtent, dateExtent }) => {
               onChange={(date) => setEndDate(date)}
             />
           </div>
+        </Col>
+        <Col md={4}>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => resetSelection()}
+          >
+            Reset Date Selection
+          </Button>
         </Col>
       </Row>
     </Container>
@@ -133,11 +148,25 @@ export const HeartRateGraphView = () => {
                 />
               </g>
             </svg>
+            <Container fluid="md">
+              <Row>
+                <Col md={12}>
+                  <h6>
+                    Click and hold left mouse button on the graph above to
+                    select specific time interval.
+                  </h6>
+                </Col>
+              </Row>
+            </Container>
           </Card>
         </Col>
         <Col md={3}>
           <Card className="shadow p-3 mb-5 bg-white rounded">
-            <Summary data={filteredData} />
+            <Summary
+              data={userSelectedData}
+              filteredData={filteredData}
+              brushExtent={brushExtent}
+            />
           </Card>
         </Col>
       </Row>

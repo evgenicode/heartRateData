@@ -1,29 +1,36 @@
 import { getTimeline, infinityNaNguard } from "utils";
 
-export const Summary = ({ data }) => {
+export const Summary = ({ data, filteredData, brushExtent }) => {
+  const dynamicData = brushExtent ? filteredData : data;
   const getMinMaxValues = () => {
-    const minValue = data.reduce(
+    const minValue = dynamicData.reduce(
       (min, { value }) => Math.min(min, value),
       Infinity
     );
-    const maxValue = data.reduce((max, { value }) => Math.max(max, value), 0);
+    const maxValue = dynamicData.reduce(
+      (max, { value }) => Math.max(max, value),
+      0
+    );
     return { minValue, maxValue };
   };
 
   const sumOfAllMeasurements = (data) =>
     data.reduce((accumulator, current) => accumulator + current.value, 0);
 
-  const minutesTotal = getTimeline(data).minutesTotal;
-  const minValue = infinityNaNguard(getMinMaxValues(data).minValue);
-  const maxValue = getMinMaxValues(data).maxValue;
-  const missingDatapoints = minutesTotal - data.length;
+  const minutesTotal = getTimeline(dynamicData).minutesTotal;
+  const minValue = infinityNaNguard(getMinMaxValues(dynamicData).minValue);
+  const maxValue = getMinMaxValues(dynamicData).maxValue;
+  const missingDatapoints = minutesTotal - dynamicData.length;
 
   const averageBPM = infinityNaNguard(
-    (sumOfAllMeasurements(data) / (minutesTotal - missingDatapoints)).toFixed(1)
+    (
+      sumOfAllMeasurements(dynamicData) /
+      (minutesTotal - missingDatapoints)
+    ).toFixed(1)
   );
 
   const averageMeasurement = infinityNaNguard(
-    minutesTotal / data.length
+    minutesTotal / dynamicData.length
   ).toFixed(2);
 
   return (
@@ -32,7 +39,7 @@ export const Summary = ({ data }) => {
       <p>Max value: {maxValue} BPM</p>
       <p>Min value: {minValue} BPM</p>
       <p>Avg value: {averageBPM} BPM</p>
-      <p>{data.length} datapoints</p>
+      <p>{dynamicData.length} datapoints</p>
       <p>Avg measurement interval: {averageMeasurement} min</p>
     </div>
   );
