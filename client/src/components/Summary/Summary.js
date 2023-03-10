@@ -34,7 +34,7 @@ export const Summary = ({ data, filteredData, brushExtent }) => {
   ).toFixed(2);
 
   return (
-    <div>
+    <div className="grey-text">
       <h3>Summary</h3>
       <p>Max value: {maxValue} BPM</p>
       <p>Min value: {minValue} BPM</p>

@@ -34,7 +34,7 @@ code {
   width: 100%;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 0.5;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
@@ -44,6 +44,34 @@ code {
 }
 
 .react-datepicker__input-container input:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #495057;
+  box-shadow: 0 0 0 0.1rem #495057;
+}
+
+.grey-text {
+  color: #495057;
+}
+
+.reset-button {
+  height: 100%;
+}
+.graph-card-header {
+  padding: 1.275rem 0rem 0.475rem 0rem;
+}
+
+.datepicker-input {
+  padding: 0rem 0rem 0.075rem 0rem;
+}
+
+.datepicker-input-items {
+  padding: 0rem 0rem 0.375rem 0rem;
+}
+
+.app-header {
+  padding: 2rem 0rem 1.5rem 0rem;
+}
+
+.heart-rate-graph-footer {
+  margin: 0rem 0rem 1rem 0rem;
+  text-align: center;
 }

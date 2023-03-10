@@ -10,6 +10,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import subDays from "date-fns/subDays";
+import addDays from "date-fns/addDays";
 
 const height = 500;
 const LinechartBrushSize = 0.3;
@@ -17,52 +19,70 @@ const offset = 30;
 
 const xValue = (d) => d.startTime;
 
-const DataDateFilter = ({ data, setDateExtent, dateExtent }) => {
-  const [startDate, setStartDate] = useState(data[0].startTime);
-  const [endDate, setEndDate] = useState(data[data.length - 1].startTime);
+const DataDateFilter = ({ data, setDateExtent }) => {
+  const selectionFirstDate = data[0].startTime;
+  const selectionLastDate = data[data.length - 1].startTime;
+
+  const [startDate, setStartDate] = useState(selectionFirstDate);
+  const [endDate, setEndDate] = useState(selectionLastDate);
 
   useEffect(() => {
     setDateExtent([startDate, endDate]);
   }, [startDate, endDate, setDateExtent]);
 
   const resetSelection = () => {
-    setStartDate(data[0].startTime);
-    setEndDate(data[data.length - 1].startTime);
+    setStartDate(selectionFirstDate);
+    setEndDate(selectionLastDate);
   };
 
   return (
     <Container fluid="md">
-      <Row>
+      <Row className="graph-card-header">
         <Col md={12}>
           <h5>You can select the time frame period below:</h5>
         </Col>
       </Row>
 
-      <Row>
-        <Col md={4}>
+      <Row className="datepicker-input">
+        <Col md={4} className="datepicker-input-items">
           <div className="d-flex align-items-center">
             <span style={{ marginRight: "1%", whiteSpace: "nowrap" }}>
               Start date
             </span>
             <DatePicker
+              dateFormat="dd MMM yyyy"
               selected={startDate}
               onChange={(date) => setStartDate(date)}
+              includeDateIntervals={[
+                {
+                  start: subDays(selectionFirstDate, 1),
+                  end: addDays(endDate, -1),
+                },
+              ]}
             />
           </div>
         </Col>
-        <Col md={4}>
+        <Col md={4} className="datepicker-input-items">
           <div className="d-flex align-items-center">
             <span style={{ marginRight: "1%", whiteSpace: "nowrap" }}>
               End date
             </span>
             <DatePicker
+              dateFormat="dd MMM yyyy"
               selected={endDate}
               onChange={(date) => setEndDate(date)}
+              includeDateIntervals={[
+                {
+                  start: subDays(startDate, 0),
+                  end: addDays(selectionLastDate, 0),
+                },
+              ]}
             />
           </div>
         </Col>
-        <Col md={4}>
+        <Col md={4} className="datepicker-input-items">
           <Button
+            className="reset-button"
             variant="secondary"
             size="sm"
             onClick={() => resetSelection()}
@@ -120,7 +140,7 @@ export const HeartRateGraphView = () => {
     <Container fluid="md">
       <Row>
         <Col md={9} className="linechart-container">
-          <Card className="shadow  mb-5 bg-white rounded">
+          <Card className="shadow  mb-5 bg-white rounded grey-text">
             <DataDateFilter
               data={data}
               setDateExtent={setDateExtent}
@@ -151,7 +171,7 @@ export const HeartRateGraphView = () => {
             <Container fluid="md">
               <Row>
                 <Col md={12}>
-                  <h6>
+                  <h6 className="heart-rate-graph-footer">
                     Click and hold left mouse button on the graph above to
                     select specific time interval.
                   </h6>

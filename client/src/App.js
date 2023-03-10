@@ -12,13 +12,9 @@ function App() {
       <Container fluid="md">
         <Row>
           <Col>
-            <h2>
+            <h2 className="app-header">
               This app displays a sample dataset captured by a Huawei wristband.
             </h2>
-            <p>
-              You can select a <i>specific time interval</i> on the bottom graph
-              by clicking and holding the left button on your mouse.
-            </p>
           </Col>
         </Row>
         <Row>
