@@ -3,6 +3,7 @@ import { useData } from "./useData";
 import { Linechart } from "components/Linechart/Linechart";
 import { LinechartBrush } from "components/LinechartBrush/LinechartBrush";
 import { Summary } from "components/Summary/Summary";
+import { dataExtentFilter } from "utils";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,9 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
 
-const height = 500;
 const LinechartBrushSize = 0.3;
-const offset = 30;
 
 const xValue = (d) => d.startTime;
 
@@ -100,14 +99,39 @@ export const HeartRateGraphView = () => {
   const [brushExtent, setBrushExtent] = useState();
   const [width, setWidth] = useState(1);
   const [dateExtent, setDateExtent] = useState();
+  const [height, setHeight] = useState(500);
 
   useEffect(() => {
+    const screenBreakPoint = 992;
     const container = document.querySelector(".linechart-container");
+
     if (container && data) {
-      setWidth(container.offsetWidth - offset);
+      const desktopHeight = 500;
+      const mobileHeight =
+        window.orientation === 0
+          ? window.innerHeight * 0.6
+          : window.innerHeight * 1;
+
+      const desktopOffset = 30;
+      const mobileOffset = 20;
+      setWidth(
+        container.offsetWidth -
+          (window.innerWidth >= screenBreakPoint ? desktopOffset : mobileOffset)
+      );
+      setHeight(
+        window.innerWidth >= screenBreakPoint ? desktopHeight : mobileHeight
+      );
 
       const handleResize = () => {
-        setWidth(container.offsetWidth - offset);
+        setWidth(
+          container.offsetWidth -
+            (window.innerWidth >= screenBreakPoint
+              ? desktopOffset
+              : mobileOffset)
+        );
+        setHeight(
+          window.innerWidth >= screenBreakPoint ? desktopHeight : mobileHeight
+        );
       };
 
       window.addEventListener("resize", handleResize);
@@ -123,23 +147,24 @@ export const HeartRateGraphView = () => {
   }
 
   const filteredData = brushExtent
-    ? data.filter((d) => {
-        const date = xValue(d);
+    ? data.filter((item) => {
+        const date = xValue(item);
+
         return date > brushExtent[0] && date < brushExtent[1];
       })
     : data;
 
   const userSelectedData = dateExtent
-    ? data.filter((d) => {
-        const date = xValue(d);
+    ? data.filter((item) => {
+        const date = xValue(item);
         return date > dateExtent[0] && date < dateExtent[1];
       })
     : data;
 
   return (
-    <Container fluid="md">
+    <Container fluid="lg">
       <Row>
-        <Col md={9} className="linechart-container">
+        <Col lg={9} className="linechart-container">
           <Card className="shadow  mb-5 bg-white rounded grey-text">
             <DataDateFilter
               data={data}
@@ -168,9 +193,9 @@ export const HeartRateGraphView = () => {
                 />
               </g>
             </svg>
-            <Container fluid="md">
+            <Container fluid="lg">
               <Row>
-                <Col md={12}>
+                <Col lg={12}>
                   <h6 className="heart-rate-graph-footer">
                     Click and hold left mouse button on the graph above to
                     select specific time interval.
@@ -180,7 +205,7 @@ export const HeartRateGraphView = () => {
             </Container>
           </Card>
         </Col>
-        <Col md={3}>
+        <Col lg={3}>
           <Card className="shadow p-3 mb-5 bg-white rounded">
             <Summary
               data={userSelectedData}
