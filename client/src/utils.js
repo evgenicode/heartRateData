@@ -36,7 +36,7 @@ export const tickModifier = (data) => {
   return axisTickModifier;
 };
 
-export const dataExtentFilter = ({ dataExtent, data, xValue }) =>
+export const dataExtentFilter = (dataExtent, data, xValue) =>
   dataExtent
     ? data.filter((d) => {
         const date = xValue(d);
