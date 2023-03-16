@@ -4,7 +4,7 @@
 /server/node_modules
 
 # prod
-/server/build
+/server/dist
 
 
 /server/.env
