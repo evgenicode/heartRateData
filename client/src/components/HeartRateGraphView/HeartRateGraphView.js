@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
 
 const LinechartBrushSize = 0.3;
 
@@ -63,7 +64,15 @@ export const HeartRateGraphView = () => {
   }, [data]);
 
   if (!data) {
-    return <pre>Loading...</pre>;
+    return (
+      <Container fluid="lg">
+        <div className="loader">
+          <Spinner animation="border" variant="secondary">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      </Container>
+    );
   }
 
   const filteredData = dataExtentFilter(brushExtent, data, xValue);
