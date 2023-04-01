@@ -83,3 +83,42 @@ code {
   align-items: center;
   height: inherit;
 }
+
+/* Slider */
+.horizontal-slider {
+  padding: 2rem 0rem 1.5rem 0rem;
+  background-color: #ffffff;
+}
+
+.thumb {
+  position: relative;
+  top: 1.55rem;
+  border-radius: 20px;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: white;
+  background-color: #6c757d;
+  border: 2px solid white;
+  cursor: grab;
+  z-index: 0 !important;
+}
+
+.thumb:focus-visible {
+  outline: auto 0px;
+}
+
+.track {
+  height: 0.3rem;
+  background-color: #c4c4c4;
+}
+
+.track-1 {
+  background-color: #5d71a8;
+}
+
+/* Slider */
+
+.react-datepicker__month-container {
+  position: relative;
+  z-index: 1 !important;
+}

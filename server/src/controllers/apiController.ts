@@ -4,6 +4,7 @@ import expressAsyncHandler = require("express-async-handler");
 import healthDetailData from "../models/healthDetailModel";
 import { hasHealthTypeCode } from "../interfaces/interfaces";
 import { heartRateFilter } from "../filters/heartRateFilter";
+import { hasHealthTypeCode2 } from "../interfaces/interfaces";
 
 const CLIENT_URL = process.env.CLIENT_URL;
 
@@ -22,5 +23,16 @@ export const getHeartRateDataFromDatabase = expressAsyncHandler(
     const filteredData = heartRateFilter(data);
     res.set("Access-Control-Allow-Origin", CLIENT_URL);
     res.status(200).json(filteredData);
+  }
+);
+
+export const getSleepData = expressAsyncHandler(
+  async (req: Request, res: Response) => {
+    const data: Array<any> = await healthDetailData.find({
+      type: 9,
+    });
+
+    res.set("Access-Control-Allow-Origin", CLIENT_URL);
+    res.status(200).json(data);
   }
 );

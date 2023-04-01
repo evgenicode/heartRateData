@@ -11,3 +11,7 @@ export interface hasHealthTypeCode {
   samplePoints: Array<samplePoint>;
   type: number;
 }
+
+export interface hasHealthTypeCode2 {
+  type: number;
+}

@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
+import { MultiRangeSlider } from "components/MultiRangeSlider/MultiRangeSlider";
 
 export const DataDateFilter = ({ data, setDateExtent }) => {
   const selectionFirstDate = data[0].startTime;
@@ -78,6 +79,11 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
           >
             Reset Date Selection
           </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <MultiRangeSlider />
         </Col>
       </Row>
     </Container>
