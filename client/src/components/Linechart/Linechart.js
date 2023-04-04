@@ -43,13 +43,6 @@ export const Linechart = ({
       .nice();
   }, [data, innerHeight, yMax]);
 
-  const yScale2 = useMemo(() => {
-    return scaleLinear()
-      .domain(extent(data, yValue))
-      .range([innerHeight, 0])
-      .nice();
-  }, [data, innerHeight]);
-
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>

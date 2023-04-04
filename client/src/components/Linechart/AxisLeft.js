@@ -16,7 +16,6 @@ export const AxisLeft = memo(({ yScale, innerWidth, tickOffset = 3 }) =>
       >
         {tickValue}
       </text>
-      {console.log("AxisLeft")}
     </g>
   ))
 );
