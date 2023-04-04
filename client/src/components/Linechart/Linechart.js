@@ -22,7 +22,7 @@ export const Linechart = ({
   const innerWidth = width - margin.left - margin.right;
 
   const xValue = (d) => d.startTime;
-  const xAxisLabel = getTimeDifference(filteredData);
+  const xAxisLabel = getTimeDifference(dynamicData);
 
   const yValue = (d) => d.value;
   const yAxisLabel = "Heart Rate";
