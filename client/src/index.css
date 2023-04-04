@@ -84,7 +84,7 @@ code {
   height: inherit;
 }
 
-/* Slider */
+/* Slider start*/
 .horizontal-slider {
   padding: 2rem 0rem 1.5rem 0rem;
   background-color: #ffffff;
@@ -113,12 +113,11 @@ code {
 }
 
 .track-1 {
-  background-color: #5d71a8;
+  background-color: #756b7d;
 }
+/* Slider end*/
 
-/* Slider */
-
-.react-datepicker__month-container {
+.react-datepicker__month-container .react-datepicker__navigation-icon {
   position: relative;
   z-index: 1 !important;
 }

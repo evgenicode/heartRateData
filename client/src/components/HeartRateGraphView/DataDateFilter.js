@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
 import { MultiRangeSlider } from "components/MultiRangeSlider/MultiRangeSlider";
+import ReactSlider from "react-slider";
 
 export const DataDateFilter = ({ data, setDateExtent }) => {
   const selectionFirstDate = data[0].startTime;
@@ -23,6 +24,37 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
   const resetSelection = () => {
     setStartDate(selectionFirstDate);
     setEndDate(selectionLastDate);
+  };
+
+  const MultiRangeSlider2 = () => {
+    const handleThumbChange = (thumb, index) => {
+      // console.log(thumb, index);
+      //console.log(new Date(thumb[0]));
+      // setStartDate(new Date(thumb[0]));
+      // setEndDate(new Date(thumb[1]));
+      // setDateExtent([startDate, endDate]);
+    };
+    return (
+      <div>
+        <ReactSlider
+          className="horizontal-slider"
+          thumbClassName="thumb"
+          trackClassName="track"
+          defaultValue={[
+            data[0].startTime.getTime(),
+            data[data.length - 1].startTime.getTime(),
+          ]}
+          ariaLabel={["Lower thumb", "Upper thumb"]}
+          ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
+          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+          pearling
+          minDistance={10}
+          min={data[0].startTime.getTime()}
+          max={data[data.length - 1].startTime.getTime()}
+          onChange={handleThumbChange}
+        />
+      </div>
+    );
   };
 
   return (
@@ -83,7 +115,16 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
       </Row>
       <Row>
         <Col>
-          <MultiRangeSlider />
+          <MultiRangeSlider
+            data={data}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <MultiRangeSlider2 />
         </Col>
       </Row>
     </Container>

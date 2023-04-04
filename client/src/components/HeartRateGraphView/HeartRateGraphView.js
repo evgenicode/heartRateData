@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useData } from "./useData";
 import { Linechart } from "components/Linechart/Linechart";
 import { LinechartBrush } from "components/LinechartBrush/LinechartBrush";
@@ -18,7 +18,7 @@ const xValue = (d) => d.startTime;
 export const HeartRateGraphView = () => {
   const data = useData();
   const [brushExtent, setBrushExtent] = useState();
-  const [width, setWidth] = useState(1);
+  const [width, setWidth] = useState(0);
   const [dateExtent, setDateExtent] = useState();
   const [height, setHeight] = useState(500);
 
@@ -63,6 +63,14 @@ export const HeartRateGraphView = () => {
     }
   }, [data]);
 
+  const userSelectedData = useMemo(() => {
+    return dataExtentFilter(dateExtent, data, xValue);
+  }, [dateExtent, data]);
+
+  const filteredData = useMemo(() => {
+    return dataExtentFilter(brushExtent, data, xValue);
+  }, [brushExtent, data]);
+
   if (!data) {
     return (
       <Container fluid="lg">
@@ -74,9 +82,6 @@ export const HeartRateGraphView = () => {
       </Container>
     );
   }
-
-  const filteredData = dataExtentFilter(brushExtent, data, xValue);
-  const userSelectedData = dataExtentFilter(dateExtent, data, xValue);
 
   return (
     <Container fluid="lg">

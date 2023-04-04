@@ -1,7 +1,7 @@
 import ReactSlider from "react-slider";
 import { useState } from "react";
 
-export const MultiRangeSlider = () => {
+export const MultiRangeSlider = (data, setStartDate, setEndDate) => {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(500);
 
@@ -11,7 +11,7 @@ export const MultiRangeSlider = () => {
         className="horizontal-slider"
         thumbClassName="thumb"
         trackClassName="track"
-        defaultValue={[0, 100]}
+        defaultValue={[50, 100]}
         ariaLabel={["Lower thumb", "Upper thumb"]}
         ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
         renderThumb={(props) => <div {...props}></div>}

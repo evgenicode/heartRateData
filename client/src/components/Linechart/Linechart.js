@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { scaleLinear, scaleTime, extent, min, max } from "d3";
 import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
@@ -36,10 +36,19 @@ export const Linechart = ({
 
   const yMax = max(data, yValue) + 10;
 
-  const yScale = scaleLinear()
-    .domain([min(data, yValue), yMax])
-    .range([innerHeight, 0])
-    .nice();
+  const yScale = useMemo(() => {
+    return scaleLinear()
+      .domain([min(data, yValue), yMax])
+      .range([innerHeight, 0])
+      .nice();
+  }, [data, innerHeight, yMax]);
+
+  const yScale2 = useMemo(() => {
+    return scaleLinear()
+      .domain(extent(data, yValue))
+      .range([innerHeight, 0])
+      .nice();
+  }, [data, innerHeight]);
 
   return (
     <svg width={width} height={height}>

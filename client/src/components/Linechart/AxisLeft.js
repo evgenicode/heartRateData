@@ -1,4 +1,6 @@
-export const AxisLeft = ({ yScale, innerWidth, tickOffset = 3 }) =>
+import React, { memo } from "react";
+
+export const AxisLeft = memo(({ yScale, innerWidth, tickOffset = 3 }) =>
   yScale.ticks().map((tickValue) => (
     <g
       key={tickValue}
@@ -14,5 +16,7 @@ export const AxisLeft = ({ yScale, innerWidth, tickOffset = 3 }) =>
       >
         {tickValue}
       </text>
+      {console.log("AxisLeft")}
     </g>
-  ));
+  ))
+);
