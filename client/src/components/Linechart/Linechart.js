@@ -27,7 +27,7 @@ export const Linechart = ({
   const yValue = (d) => d.value;
   const yAxisLabel = "Heart Rate";
 
-  const xAxisTickFormat = getTickFormat(filteredData);
+  const xAxisTickFormat = getTickFormat(dynamicData);
 
   const xScale = scaleTime()
     .domain(extent(dynamicData, xValue))
