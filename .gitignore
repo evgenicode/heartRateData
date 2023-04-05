@@ -8,7 +8,10 @@
 
 
 /server/.env
-
+/server/src/data/healthDetailData.json
+/server/dist/data/healthDetailData.json
+/server/src/data/healthDetailData2.json
+/server/dist/data/healthDetailData2.json
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
