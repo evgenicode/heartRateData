@@ -7,7 +7,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
-import { MultiRangeSlider } from "components/MultiRangeSlider/MultiRangeSlider";
 import ReactSlider from "react-slider";
 
 export const DataDateFilter = ({ data, setDateExtent }) => {
@@ -26,32 +25,42 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
     setEndDate(selectionLastDate);
   };
 
-  const MultiRangeSlider2 = () => {
-    const handleThumbChange = (thumb, index) => {
-      // console.log(thumb, index);
-      //console.log(new Date(thumb[0]));
-      // setStartDate(new Date(thumb[0]));
-      // setEndDate(new Date(thumb[1]));
-      // setDateExtent([startDate, endDate]);
+  const MultiRangeSlider = () => {
+    const [values, setValues] = useState([startDate, endDate]);
+    const [isBeingDragged, setBeingDragged] = useState(false);
+
+    const handleThumbChange = (thumb) => {
+      setValues(thumb);
+      setBeingDragged(true);
     };
+
+    const handleThumbRelease = (thumb) => {
+      setStartDate(new Date(thumb[0]));
+      setEndDate(new Date(thumb[1]));
+      setBeingDragged(false);
+    };
+
     return (
       <div>
         <ReactSlider
           className="horizontal-slider"
           thumbClassName="thumb"
           trackClassName="track"
-          defaultValue={[
-            data[0].startTime.getTime(),
-            data[data.length - 1].startTime.getTime(),
-          ]}
+          value={values}
           ariaLabel={["Lower thumb", "Upper thumb"]}
           ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
-          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+          renderThumb={(props, state) => (
+            <div {...props}>
+              <div className="thumb-value">
+                {isBeingDragged && new Date(state.valueNow).toDateString()}
+              </div>
+            </div>
+          )}
           pearling
-          minDistance={10}
           min={data[0].startTime.getTime()}
           max={data[data.length - 1].startTime.getTime()}
           onChange={handleThumbChange}
+          onAfterChange={handleThumbRelease}
         />
       </div>
     );
@@ -113,18 +122,10 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
           </Button>
         </Col>
       </Row>
+
       <Row>
         <Col>
-          <MultiRangeSlider
-            data={data}
-            setStartDate={setStartDate}
-            setEndDate={setEndDate}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <MultiRangeSlider2 />
+          <MultiRangeSlider />
         </Col>
       </Row>
     </Container>

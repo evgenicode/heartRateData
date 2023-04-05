@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useData } from "./useData";
 import { Linechart } from "components/Linechart/Linechart";
 import { LinechartBrush } from "components/LinechartBrush/LinechartBrush";

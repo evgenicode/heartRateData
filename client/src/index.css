@@ -103,6 +103,16 @@ code {
   z-index: 0 !important;
 }
 
+.thumb-value {
+  color: #495057;
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
 .thumb:focus-visible {
   outline: auto 0px;
 }
