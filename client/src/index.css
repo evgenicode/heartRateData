@@ -106,11 +106,15 @@ code {
 .thumb-value {
   color: #495057;
   position: absolute;
-  bottom: calc(100% + 4px);
+  top: calc(100% + 2px);
   left: 50%;
   transform: translateX(-50%);
   font-size: 12px;
   white-space: nowrap;
+}
+.active-thumb .thumb-value {
+  bottom: calc(100% + 2px) !important;
+  top: unset !important;
 }
 
 .thumb:focus-visible {

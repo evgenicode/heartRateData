@@ -48,6 +48,7 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
           trackClassName="track"
           value={values}
           ariaLabel={["Lower thumb", "Upper thumb"]}
+          thumbActiveClassName={"active-thumb"}
           ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
           renderThumb={(props, state) => (
             <div {...props}>
