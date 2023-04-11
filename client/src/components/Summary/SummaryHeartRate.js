@@ -1,6 +1,6 @@
 import { getTimeline, infinityNaNguard } from "utils";
 
-export const Summary = ({ data, filteredData, brushExtent }) => {
+export const SummaryHeartRate = ({ data, filteredData, brushExtent }) => {
   const dynamicData = brushExtent ? filteredData : data;
   const getMinMaxValues = () => {
     const minValue = dynamicData.reduce(
@@ -35,7 +35,7 @@ export const Summary = ({ data, filteredData, brushExtent }) => {
 
   return (
     <div className="grey-text">
-      <h3>Summary</h3>
+      <h3>HR Summary</h3>
       <p>Max value: {maxValue} BPM</p>
       <p>Min value: {minValue} BPM</p>
       <p>Avg value: {averageBPM} BPM</p>

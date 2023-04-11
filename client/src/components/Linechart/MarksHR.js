@@ -1,6 +1,6 @@
 import { line, curveBasis } from "d3";
 
-export const Marks = ({ data, xScale, yScale, xValue, yValue }) => (
+export const MarksHR = ({ data, xScale, yScale, xValue, yValue }) => (
   <g className="marks">
     <path
       fill="none"

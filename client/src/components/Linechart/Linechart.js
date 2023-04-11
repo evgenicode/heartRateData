@@ -1,8 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { scaleLinear, scaleTime, extent, min, max } from "d3";
 import { AxisBottom } from "./AxisBottom";
 import { AxisLeft } from "./AxisLeft";
-import { Marks } from "./Marks";
+import { MarksHR } from "./MarksHR";
+import { MarksSleep } from "./MarksSleep";
 import { getTimeDifference } from "./getTimeDifference";
 import { getTickFormat } from "./getTickFormat";
 
@@ -16,12 +17,19 @@ export const Linechart = ({
   data,
   filteredData,
   brushExtent,
+  userSelectedSleepData,
+  filteredSleepData,
+  sleepDataDisplayed,
 }) => {
   const dynamicData = brushExtent ? filteredData : data;
+  const dynamicSleepData = brushExtent
+    ? filteredSleepData
+    : userSelectedSleepData;
+
   const innerHeight = height - margin.top - margin.bottom;
   const innerWidth = width - margin.left - margin.right;
 
-  const xValue = (d) => d.startTime;
+  const xValue = useCallback((d) => d.startTime, []);
   const xAxisLabel = getTimeDifference(dynamicData);
 
   const yValue = (d) => d.value;
@@ -29,10 +37,12 @@ export const Linechart = ({
 
   const xAxisTickFormat = getTickFormat(dynamicData);
 
-  const xScale = scaleTime()
-    .domain(extent(dynamicData, xValue))
-    .range([0, innerWidth])
-    .nice();
+  const xScale = useMemo(() => {
+    return scaleTime()
+      .domain(extent(dynamicData, xValue))
+      .range([0, innerWidth])
+      .nice();
+  }, [dynamicData, xValue, innerWidth]);
 
   const yMax = max(data, yValue) + 10;
 
@@ -71,7 +81,23 @@ export const Linechart = ({
         >
           {xAxisLabel}
         </text>
-        <Marks
+        <>
+          {sleepDataDisplayed === true ? (
+            <MarksSleep
+              sleepData={dynamicSleepData}
+              xScale={xScale}
+              yScale={yScale}
+              xValue={xValue}
+              yValue={yValue}
+              yMax={yMax}
+              margin={margin}
+            />
+          ) : (
+            <></>
+          )}
+        </>
+
+        <MarksHR
           data={dynamicData}
           xScale={xScale}
           yScale={yScale}

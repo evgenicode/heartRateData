@@ -135,3 +135,14 @@ code {
   position: relative;
   z-index: 1 !important;
 }
+
+.mark {
+  fill: #137b80;
+  fill-opacity: 81%;
+}
+
+.graph-buttons {
+  position: relative;
+  float: right;
+  padding: 0rem 1rem 1.075rem 0rem;
+}

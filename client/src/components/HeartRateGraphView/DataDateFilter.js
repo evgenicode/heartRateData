@@ -40,6 +40,9 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
       setBeingDragged(false);
     };
 
+    // console.log(values);
+    //TODO: Fix Warning: Failed prop type: Invalid prop `value` supplied to `ReactSlider`,
+    //expected one of type [number, number].
     return (
       <div>
         <ReactSlider

@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { heartRateDataFormated } from "../data/getLocalData";
+import {
+  heartRateDataFormated,
+  sleepData,
+  sleepDataFormatted,
+} from "../data/getLocalData";
 import expressAsyncHandler = require("express-async-handler");
 import healthDetailData from "../models/healthDetailModel";
 import { hasHealthTypeCode } from "../interfaces/interfaces";
@@ -28,11 +32,18 @@ export const getHeartRateDataFromDatabase = expressAsyncHandler(
 
 export const getSleepData = expressAsyncHandler(
   async (req: Request, res: Response) => {
-    const data: Array<any> = await healthDetailData.find({
-      type: 9,
-    });
-
     res.set("Access-Control-Allow-Origin", CLIENT_URL);
-    res.status(200).json(data);
+    res.send(sleepDataFormatted);
   }
 );
+
+// export const getSleepData = expressAsyncHandler(
+//   async (req: Request, res: Response) => {
+//     const data: Array<any> = await healthDetailData.find({
+//       type: 9,
+//     });
+
+//     res.set("Access-Control-Allow-Origin", CLIENT_URL);
+//     res.status(200).json(data);
+//   }
+// );

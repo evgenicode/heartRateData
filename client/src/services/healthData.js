@@ -8,6 +8,11 @@ if (configData.DATA_ORIGIN === "local") {
 }
 
 export const getHeartRateData = () => {
-  const request = axios.get(apiUrl);
+  const request = axios.get(apiUrl + "/heartRateDataFromDatabase");
+  return request.then((response) => response.data);
+};
+
+export const getSleepData = () => {
+  const request = axios.get(apiUrl + "/getSleepData");
   return request.then((response) => response.data);
 };

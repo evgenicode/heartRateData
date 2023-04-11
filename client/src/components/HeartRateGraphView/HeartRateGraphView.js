@@ -2,14 +2,17 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useData } from "./useData";
 import { Linechart } from "components/Linechart/Linechart";
 import { LinechartBrush } from "components/LinechartBrush/LinechartBrush";
-import { Summary } from "components/Summary/Summary";
+import { SummaryHeartRate } from "components/Summary/SummaryHeartRate";
+import { SummarySleep } from "components/Summary/SummarySleep";
 import { dataExtentFilter } from "utils";
 import { DataDateFilter } from "./DataDateFilter";
+import { getSleepData } from "services/healthData";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
+import Button from "react-bootstrap/Button";
 
 const LinechartBrushSize = 0.3;
 
@@ -21,6 +24,25 @@ export const HeartRateGraphView = () => {
   const [width, setWidth] = useState(0);
   const [dateExtent, setDateExtent] = useState();
   const [height, setHeight] = useState(500);
+  const [sleepData, setSleepData] = useState(null);
+  const [sleepDataRequested, setSleepDataRequested] = useState(false);
+  const [sleepDataDisplayed, setSleepDataDisplayed] = useState(false);
+
+  const loadSleepData = () => {
+    setSleepDataRequested(true);
+
+    getSleepData()
+      .then((data) =>
+        data.map((item) => ({
+          startTime: new Date(item.startTime),
+          endTime: new Date(item.endTime),
+          key: String(item.key),
+        }))
+      )
+      .then((formattedData) => {
+        setSleepData(formattedData);
+      });
+  };
 
   useEffect(() => {
     const screenBreakPoint = 992;
@@ -63,13 +85,35 @@ export const HeartRateGraphView = () => {
     }
   }, [data]);
 
+  // TODO: test for bugs. Code below crashes if not memoized&declared before data null check
   const userSelectedData = useMemo(() => {
+    if (data === null) {
+      return;
+    }
     return dataExtentFilter(dateExtent, data, xValue);
   }, [dateExtent, data]);
 
   const filteredData = useMemo(() => {
+    if (data === null) {
+      return;
+    }
     return dataExtentFilter(brushExtent, data, xValue);
   }, [brushExtent, data]);
+  // TODO: test for bugs. Code above crashes if not memoized&declared before data null check
+
+  const userSelectedSleepData = useMemo(() => {
+    if (sleepData === null) {
+      return;
+    }
+    return dataExtentFilter(dateExtent, sleepData, xValue);
+  }, [dateExtent, sleepData]);
+
+  const filteredSleepData = useMemo(() => {
+    if (sleepData === null) {
+      return;
+    }
+    return dataExtentFilter(brushExtent, sleepData, xValue);
+  }, [brushExtent, sleepData]);
 
   if (!data) {
     return (
@@ -82,6 +126,14 @@ export const HeartRateGraphView = () => {
       </Container>
     );
   }
+
+  const sleepDataButtonText = () => {
+    return sleepDataDisplayed === false ? "Show sleep data" : "Hide sleep data";
+  };
+
+  const handleSleepButtonClick = () => {
+    setSleepDataDisplayed(!sleepDataDisplayed);
+  };
 
   return (
     <Container fluid="lg">
@@ -100,6 +152,9 @@ export const HeartRateGraphView = () => {
                 height={height - LinechartBrushSize * height}
                 width={width}
                 brushExtent={brushExtent}
+                userSelectedSleepData={userSelectedSleepData}
+                filteredSleepData={filteredSleepData}
+                sleepDataDisplayed={sleepDataDisplayed}
               />
               <g
                 transform={`translate(${0}, ${
@@ -124,15 +179,44 @@ export const HeartRateGraphView = () => {
                   </h6>
                 </Col>
               </Row>
+              <Row>
+                <Col md={4}></Col>
+                <Col md={4}></Col>
+
+                <Col md={4}>
+                  <div className="graph-buttons">
+                    {sleepData === null ? (
+                      <div></div>
+                    ) : (
+                      <Button
+                        className="reset-button"
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => handleSleepButtonClick()}
+                      >
+                        {sleepDataButtonText()}
+                      </Button>
+                    )}
+                  </div>
+                </Col>
+              </Row>
             </Container>
           </Card>
         </Col>
         <Col lg={3}>
           <Card className="shadow p-3 mb-5 bg-white rounded">
-            <Summary
+            <SummaryHeartRate
               data={userSelectedData}
               filteredData={filteredData}
               brushExtent={brushExtent}
+            />
+          </Card>
+          <Card className="shadow p-3 mb-5 bg-white rounded">
+            <SummarySleep
+              sleepData={sleepData}
+              sleepDataRequested={sleepDataRequested}
+              setSleepDataRequested={setSleepDataRequested}
+              loadSleepData={loadSleepData}
             />
           </Card>
         </Col>
