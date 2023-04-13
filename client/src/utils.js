@@ -43,3 +43,15 @@ export const dataExtentFilter = (dataExtent, data, xValue) =>
         return date > dataExtent[0] && date < dataExtent[1];
       })
     : data;
+
+export const formattedTitle = (item) => {
+  const words = item.split("_").map((word) => word.toLowerCase());
+  const withoutProfessional = words.filter((word) => word !== "professional");
+  const formatted = withoutProfessional
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+  return formatted;
+};
+
+export const formattedCSSClassName = (item) =>
+  item.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();

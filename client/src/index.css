@@ -136,11 +136,43 @@ code {
   z-index: 1 !important;
 }
 
+/*Sleep marks start*/
 .mark {
   fill: #137b80;
   fill-opacity: 81%;
 }
+.professional-sleep-shallow {
+  fill: #98dbdf;
+  background-color: #98dbdf;
+  fill-opacity: 81%;
+}
 
+.professional-sleep-dream {
+  fill: #d9e622;
+  background-color: #d9e622;
+  fill-opacity: 81%;
+}
+
+.professional-sleep-deep {
+  fill: #0d565a;
+  background-color: #0d565a;
+  fill-opacity: 81%;
+}
+
+.professional-sleep-wake {
+  fill: #b50977;
+  background-color: #b50977;
+  fill-opacity: 81%;
+}
+.professional-sleep-noon {
+  fill: #eb5e71;
+  background-color: #eb5e71;
+  fill-opacity: 81%;
+}
+.rounded-squares {
+  border-radius: 5px;
+}
+/*Sleep marks end*/
 .graph-buttons {
   position: relative;
   float: right;

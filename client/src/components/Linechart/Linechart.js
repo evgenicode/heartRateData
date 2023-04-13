@@ -20,6 +20,7 @@ export const Linechart = ({
   userSelectedSleepData,
   filteredSleepData,
   sleepDataDisplayed,
+  coloredSleepStages,
 }) => {
   const dynamicData = brushExtent ? filteredData : data;
   const dynamicSleepData = brushExtent
@@ -91,6 +92,7 @@ export const Linechart = ({
               yValue={yValue}
               yMax={yMax}
               margin={margin}
+              coloredSleepStages={coloredSleepStages}
             />
           ) : (
             <></>

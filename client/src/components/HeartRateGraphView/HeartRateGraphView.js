@@ -27,6 +27,7 @@ export const HeartRateGraphView = () => {
   const [sleepData, setSleepData] = useState(null);
   const [sleepDataRequested, setSleepDataRequested] = useState(false);
   const [sleepDataDisplayed, setSleepDataDisplayed] = useState(false);
+  const [coloredSleepStages, setColoredSleepStages] = useState(false);
 
   const loadSleepData = () => {
     setSleepDataRequested(true);
@@ -155,6 +156,7 @@ export const HeartRateGraphView = () => {
                 userSelectedSleepData={userSelectedSleepData}
                 filteredSleepData={filteredSleepData}
                 sleepDataDisplayed={sleepDataDisplayed}
+                coloredSleepStages={coloredSleepStages}
               />
               <g
                 transform={`translate(${0}, ${
@@ -217,6 +219,10 @@ export const HeartRateGraphView = () => {
               sleepDataRequested={sleepDataRequested}
               setSleepDataRequested={setSleepDataRequested}
               loadSleepData={loadSleepData}
+              brushExtent={brushExtent}
+              filteredSleepData={filteredSleepData}
+              setColoredSleepStages={setColoredSleepStages}
+              coloredSleepStages={coloredSleepStages}
             />
           </Card>
         </Col>
