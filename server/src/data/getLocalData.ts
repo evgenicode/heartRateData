@@ -17,7 +17,9 @@ export const heartRateData = data.filter(
   (item: hasHealthTypeCode) => item.type === 7
 );
 
-export const sleepData = data.filter((item: any) => item.type === 9);
+export const sleepData = data.filter(
+  (item: hasHealthTypeCode) => item.type === 9
+);
 
 export const sleepDataFormatted = sleepDataFilter(sleepData);
 
