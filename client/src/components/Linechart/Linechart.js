@@ -36,14 +36,15 @@ export const Linechart = ({
   const yValue = (d) => d.value;
   const yAxisLabel = "Heart Rate";
 
-  const xAxisTickFormat = getTickFormat(dynamicData);
+  const xAxisTickFormat = getTickFormat(dynamicData, dynamicSleepData);
 
   const xScale = useMemo(() => {
+    const data = dynamicData.length ? dynamicData : dynamicSleepData || [];
     return scaleTime()
-      .domain(extent(dynamicData, xValue))
+      .domain(extent(data, xValue))
       .range([0, innerWidth])
       .nice();
-  }, [dynamicData, xValue, innerWidth]);
+  }, [dynamicData, dynamicSleepData, xValue, innerWidth]);
 
   const yMax = max(data, yValue) + 10;
 

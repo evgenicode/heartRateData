@@ -1,7 +1,8 @@
 import { timeFormat } from "d3";
 import { getTimeline } from "utils";
 
-export const getTickFormat = (data) => {
+export const getTickFormat = (primaryData, fallBackData) => {
+  const data = primaryData.length ? primaryData : fallBackData || [];
   const { timeDifference } = getTimeline(data);
 
   let tickFormat = undefined;

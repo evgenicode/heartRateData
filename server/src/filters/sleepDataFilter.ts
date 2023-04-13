@@ -1,7 +1,6 @@
 import { sleepDataPoint } from "../interfaces/interfaces";
 
 export const sleepDataFilter = (data: Array<sleepDataPoint>) => {
-  console.log(data);
   const result = [];
   let current = null;
   for (const item of data) {
