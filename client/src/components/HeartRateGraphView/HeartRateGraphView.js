@@ -42,6 +42,7 @@ export const HeartRateGraphView = () => {
       )
       .then((formattedData) => {
         setSleepData(formattedData);
+        setSleepDataDisplayed(true);
       });
   };
 
@@ -86,7 +87,6 @@ export const HeartRateGraphView = () => {
     }
   }, [data]);
 
-  // TODO: test for bugs. Code below crashes if not memoized&declared before data null check
   const userSelectedData = useMemo(() => {
     if (data === null) {
       return;
@@ -100,7 +100,6 @@ export const HeartRateGraphView = () => {
     }
     return dataExtentFilter(brushExtent, data, xValue);
   }, [brushExtent, data]);
-  // TODO: test for bugs. Code above crashes if not memoized&declared before data null check
 
   const userSelectedSleepData = useMemo(() => {
     if (sleepData === null) {

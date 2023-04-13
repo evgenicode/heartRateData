@@ -12,8 +12,13 @@ export const getTickFormat = (data) => {
     timeDifference < 3 * 24 * 60 * 60 * 1000
   ) {
     tickFormat = timeFormat("%a %\n%H:%M");
-  } else {
+  } else if (
+    timeDifference >= 3 * 24 * 60 * 60 * 1000 &&
+    timeDifference < 30 * 24 * 60 * 60 * 1000
+  ) {
     tickFormat = timeFormat("%a");
+  } else {
+    tickFormat = timeFormat("%e %b");
   }
 
   return tickFormat;

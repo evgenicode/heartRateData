@@ -2,6 +2,7 @@ import { getTimeline, infinityNaNguard } from "utils";
 
 export const SummaryHeartRate = ({ data, filteredData, brushExtent }) => {
   const dynamicData = brushExtent ? filteredData : data;
+
   const getMinMaxValues = () => {
     const minValue = dynamicData.reduce(
       (min, { value }) => Math.min(min, value),
