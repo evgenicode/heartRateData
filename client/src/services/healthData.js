@@ -1,7 +1,7 @@
 import axios from "axios";
 import configData from "config.json";
 
-let apiUrl = configData.DATABASE_API;
+export let apiUrl = configData.DATABASE_API;
 
 export const getHeartRateData = () => {
   const request = axios.get(apiUrl + "/heartRateData");
