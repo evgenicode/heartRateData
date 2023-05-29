@@ -137,7 +137,7 @@ export const HeartRateGraphView = () => {
 
   if (Array.isArray(data) && data.length === 0) {
     return (
-      <div class="alert alert-danger" role="alert">
+      <div className="alert alert-danger" role="alert">
         <h4>Something went wrong...</h4>
         <p>
           We apologize for the inconvenience. Please refresh the page to resolve
