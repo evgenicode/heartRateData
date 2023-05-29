@@ -13,7 +13,7 @@ function App() {
         <Row>
           <Col>
             <h2 className="app-header">
-              This app displays a sample dataset captured by a Huawei wristband.
+              This app displays a sample dataset captured with a wristband.
             </h2>
           </Col>
         </Row>

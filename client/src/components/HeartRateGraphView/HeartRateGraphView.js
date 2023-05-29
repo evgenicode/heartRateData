@@ -115,6 +115,14 @@ export const HeartRateGraphView = () => {
     return dataExtentFilter(brushExtent, sleepData, xValue);
   }, [brushExtent, sleepData]);
 
+  const sleepDataButtonText = () => {
+    return sleepDataDisplayed === false ? "Show sleep data" : "Hide sleep data";
+  };
+
+  const handleSleepButtonClick = () => {
+    setSleepDataDisplayed(!sleepDataDisplayed);
+  };
+
   if (!data) {
     return (
       <Container fluid="lg">
@@ -127,13 +135,18 @@ export const HeartRateGraphView = () => {
     );
   }
 
-  const sleepDataButtonText = () => {
-    return sleepDataDisplayed === false ? "Show sleep data" : "Hide sleep data";
-  };
-
-  const handleSleepButtonClick = () => {
-    setSleepDataDisplayed(!sleepDataDisplayed);
-  };
+  if (Array.isArray(data) && data.length === 0) {
+    return (
+      <div class="alert alert-danger" role="alert">
+        <h4>Something went wrong...</h4>
+        <p>
+          We apologize for the inconvenience. Please refresh the page to resolve
+          the issue. If the problem persists, we kindly ask you to try again at
+          a later time.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <Container fluid="lg">
