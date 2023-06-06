@@ -11,7 +11,7 @@ Before you run the app, you need to create a .env file in the "server" folder wi
 
 NODE_ENV = development<br>
 PORT = 5000<br>
-MONGO_URI = mongodb+srv://Github:Np1Xufzreb8e0LBN@heartratecluster.astkcqz.mongodb.net/healthDetailData?retryWrites=true&w=majority<br>
+MONGO_URI = your mongo database
 CLIENT_URL = "http://localhost:3000"<br>
 LOCAL_DATA_STORAGE = "C:\\MyFiles\\projects\\heartRateData\\server\\src\\data\\healthDetailData.json"<br>
 
