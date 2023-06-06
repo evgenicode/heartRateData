@@ -24,6 +24,8 @@
 
 # testing
 /client/coverage
+/client/cypress/e2e/1-getting-started
+/client/cypress/e2e/2-advanced-examples
 
 # production
 /client/build

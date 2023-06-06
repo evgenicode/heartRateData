@@ -39,7 +39,7 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
       setEndDate(new Date(thumb[1]));
       setBeingDragged(false);
     };
-
+    console.log(startDate);
     // console.log(values);
     //TODO: Fix Warning: Failed prop type: Invalid prop `value` supplied to `ReactSlider`,
     //expected one of type [number, number].
@@ -84,17 +84,19 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
             <span style={{ marginRight: "1%", whiteSpace: "nowrap" }}>
               Start date
             </span>
-            <DatePicker
-              dateFormat="dd MMM yyyy"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              includeDateIntervals={[
-                {
-                  start: subDays(selectionFirstDate, 1),
-                  end: addDays(endDate, -1),
-                },
-              ]}
-            />
+            <div className="date-picker-parent">
+              <DatePicker
+                dateFormat="dd MMM yyyy"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                includeDateIntervals={[
+                  {
+                    start: subDays(selectionFirstDate, 1),
+                    end: addDays(endDate, -1),
+                  },
+                ]}
+              />
+            </div>
           </div>
         </Col>
         <Col md={4} className="datepicker-input-items">
@@ -103,6 +105,7 @@ export const DataDateFilter = ({ data, setDateExtent }) => {
               End date
             </span>
             <DatePicker
+              className="test3"
               dateFormat="dd MMM yyyy"
               selected={endDate}
               onChange={(date) => setEndDate(date)}
